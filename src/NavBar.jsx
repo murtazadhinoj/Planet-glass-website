@@ -1,23 +1,53 @@
-import React from 'react'
+import React from "react";
+import { motion } from "framer-motion";
 
 const NavBar = () => {
   return (
-    <>
-        <div className='nav w-full h-28  flex align-middle justify-between border-b-2'>
-            <div className="nav-part1 w-full ">
-                <h1>Planet Glass</h1>
-            </div>
+    <motion.nav 
+      className="w-full h-20 flex items-center justify-between px-6 sm:px-12 lg:px-20 border-b-2 bg-white fixed top-0 left-0 right-0 shadow-md z-50"
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      {/* Logo */}
+      <motion.div 
+        className="text-2xl font-bold text-gray-800"
+        whileHover={{ scale: 1.05 }}
+      >
+        Planet Glass
+      </motion.div>
 
-            <div className="nav-part2   flex align-middle justify-evenly w-full">
-                <h1 className='text-xl'>Est-2020</h1>
-                <svg className="w-20 h-15  text-gray-800  " xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 24 24">
-  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 6h8m-8 4h12M6 14h8m-8 4h12"/>
-</svg>
+      {/* Centered Section */}
+      <motion.div className="hidden sm:flex items-center space-x-8">
+        <motion.h1 
+          className="text-lg font-medium text-gray-700"
+          whileHover={{ scale: 1.1, color: "#000" }}
+        >
+          Est-2020
+        </motion.h1>
+      </motion.div>
 
-            </div>
-        </div>
-    </>
-  )
-}
+      {/* Mobile Menu Icon */}
+      <motion.div 
+        className="cursor-pointer flex items-center justify-center p-2 hover:bg-gray-200 rounded-lg transition-all"
+        whileTap={{ scale: 0.9 }}
+      >
+        <svg
+          className="w-8 h-8 text-gray-800"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M6 6h12M6 12h12M6 18h12"
+          />
+        </svg>
+      </motion.div>
+    </motion.nav>
+  );
+};
 
-export default NavBar
+export default NavBar;

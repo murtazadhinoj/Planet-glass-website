@@ -5,15 +5,19 @@ import Herosection2 from './Herosection2'
 import Aboutproject from './Aboutproject'
 import KaamSection from './KaamSection'
 import ContactForm from './ContactForm'
+import CustomGlassInstallations from './CustomGlassInstallations'
+import AnimatedText from './AnimateText'
 
 const App = () => {
   return (
     <>
      <NavBar></NavBar>
+     {/* <AnimatedText></AnimatedText> */}
      <HeroSection></HeroSection>
      <Herosection2></Herosection2>
      <Aboutproject></Aboutproject>
      <KaamSection></KaamSection>
+     <CustomGlassInstallations ></CustomGlassInstallations>
      <ContactForm></ContactForm>
     </>
   )
