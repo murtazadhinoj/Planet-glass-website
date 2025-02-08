@@ -17,7 +17,7 @@ const CustomGlassInstallations = () => {
         <div>
           {/* About Section */}
           <div className="mb-10">
-            <h3 className="uppercase text-xl font-semibold mb-">about :</h3>
+            <h3 className="uppercase text-xl font-semibold">about :</h3>
             <p className="text-gray-300 leading-relaxed">
               From elegant shower enclosures to sleek office partitions, we
               craft and install high-quality glass features that enhance both
