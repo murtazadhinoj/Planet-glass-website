@@ -1,62 +1,53 @@
 import React from "react";
+import ServiceSection from "./ServiceSection";
 
+// Main Component
 const CustomGlassInstallations = () => {
   return (
-    <div className="bg-[#1c1a10] h-screen text-white py-16 px-8 md:px-20">
-      {/* Title */}
-      <div className="flex justify-between items-start border-b border-gray-500 pb-4">
-        <h1 className="text-3xl md:text-5xl font-semibold tracking-widest">
-          CUSTOM GLASS INSTALLATIONS
-        </h1>
-        <span className="text-sm md:text-base">(EK)</span>
-      </div>
+    <>
+      <ServiceSection
+     
+        title="CUSTOM GLASS INSTALLATIONS"
+        description="From elegant shower enclosures to sleek office partitions, we craft and install high-quality glass features that enhance both aesthetics and functionality."
+        services={[
+          "Initial concept meetings and workshops",
+          "Custom design & fabrication",
+          "Professional installation services",
+        ]}
+        images={[
+          "https://i.pinimg.com/736x/92/dd/04/92dd04b01b62f2ae932f2def166d405b.jpg",
+          "https://i.pinimg.com/736x/0d/d7/5f/0dd75fb7ea4d98340c7e145dabbf138d.jpg",
+        ]}
+      />
 
-      {/* Content Section */}
-      <div className="grid md:grid-cols-2 gap-10 mt-96 items-start">
-        {/* Left Content */}
-        <div>
-          {/* About Section */}
-          <div className="mb-10">
-            <h3 className="uppercase text-xl font-semibold">about :</h3>
-            <p className="text-gray-300 leading-relaxed">
-              From elegant shower enclosures to sleek office partitions, we
-              craft and install high-quality glass features that enhance both
-              aesthetics and functionality.
-            </p>
-          </div>
+      <ServiceSection
+        title="GLASS REPAIR & REPLACEMENT"
+        description="From minor cracks to full glass panel replacements, we restore clarity and security to your windows, doors, and storefronts."
+        services={[
+          "Emergency glass repair",
+          "Window resealing & defogging",
+          "Same-day glass replacement (subject to availability)",
+        ]}
+        images={[
+          "https://i.pinimg.com/736x/81/a2/39/81a239c2fb4206e3f8805ed54f3a3627.jpg",
+          "https://i.pinimg.com/736x/10/cb/54/10cb540c84ba2a30b5337a284bf93689.jpg",
+        ]}
+      />
 
-          {/* Included Section */}
-          <div>
-            <h3 className="uppercase text-sm font-semibold mb-2">included :</h3>
-            <ul className="text-gray-300 space-y-3">
-              <li className="border-b border-gray-500 pb-2">
-                . Initial concept meetings and workshops
-              </li>
-              <li className="border-b border-gray-500 pb-2">
-                . Initial concept meetings and workshops
-              </li>
-              <li className="border-b border-gray-500 pb-2">
-                . Initial concept meetings and workshops
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Right Side Image */}
-        <div className="flex flex-col gap-6">
-          <img
-            src="https://source.unsplash.com/500x300/?glass,architecture"
-            alt="Glass Installation"
-            className="w-full h-auto object-cover rounded-lg"
-          />
-          <img
-            src="https://source.unsplash.com/200x150/?interior,modern"
-            alt="Glass Interior"
-            className="w-48 h-auto object-cover rounded-lg"
-          />
-        </div>
-      </div>
-    </div>
+      <ServiceSection
+        title="ENERGY-EFFICIENT SOLUTIONS"
+        description="Reduce energy costs and enhance comfort with insulated, low-E, or tinted glass designed for superior thermal performance."
+        services={[
+          "Energy-saving glass consultation",
+          "UV & glare reduction solutions",
+          "Custom glazing for residential and commercial properties",
+        ]}
+        images={[
+          "https://i.pinimg.com/736x/c2/05/4e/c2054eb26c1a7cf9fc9679cdcb12d214.jpg",
+          "https://i.pinimg.com/736x/9e/15/79/9e157939a41bcf1259944df465c6b869.jpg",
+        ]}
+      />
+    </>
   );
 };
 

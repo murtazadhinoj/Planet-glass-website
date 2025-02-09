@@ -32,20 +32,17 @@ const Herosection2 = () => {
         </motion.div>
 
         {/* Right Content */}
-        <div className="w-full md:w-1/3 flex flex-col gap-6">
-          <p className="text-md md:text-lg leading-relaxed">
-            In every project at Saisei, the essence of 伝統 (tradition) is evident.
-            By integrating the disciplined aesthetics and thoughtful methodologies
-            of our ancestors, we ensure that each structure is not only
-            environmentally attuned but also rich in cultural significance.
-          </p>
-          <button className="border-2 border-black rounded-xl py-3 px-6 hover:bg-black hover:text-white transition-all">
-            About us
-          </button>
-        </div>
-      </div>
+          <div className="w-full md:w-1/3 flex flex-col gap-6">
+            <p className="text-md md:text-lg leading-relaxed">
+              At Planet Glass, we specialize in exquisite glass works, ensuring perfection in every piece. Our dedication to craftsmanship and attention to detail make us a leader in the industry, delivering unparalleled quality and beauty in all our projects.
+            </p>
+            <button className="border-2 border-black rounded-xl py-3 px-6 hover:bg-black hover:text-white transition-all">
+              About us
+            </button>
+          </div>
+              </div>
 
-      {/* Second Section */}
+              {/* Second Section */}
       <div className="w-full flex flex-col md:flex-row items-center justify-center gap-8">
         
         {/* Left Small Image */}

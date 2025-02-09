@@ -7,6 +7,7 @@ import KaamSection from './KaamSection'
 import ContactForm from './ContactForm'
 import CustomGlassInstallations from './CustomGlassInstallations'
 import AnimatedText from './AnimateText'
+import Footer from './Footer'
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
      <KaamSection></KaamSection>
      <CustomGlassInstallations ></CustomGlassInstallations>
      <ContactForm></ContactForm>
+     <Footer></Footer>
     </>
   )
 }
