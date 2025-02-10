@@ -20,7 +20,7 @@ const App = () => {
      <KaamSection></KaamSection>
      <CustomGlassInstallations ></CustomGlassInstallations>
      <ContactForm></ContactForm>
-     <Footer></Footer>
+    <Footer></Footer>
     </>
   )
 }
