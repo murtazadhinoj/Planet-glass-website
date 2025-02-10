@@ -10,7 +10,7 @@ const Footer = ({ isVisible, setIsVisible }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 100 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="fixed bottom-0 left-0 w-full bg-[#1a1a10] text-[#e5dcc2] py-20 px-6 sm:px-10 lg:px-20 z-50 shadow-2xl"
+          className="fixed bottom-0 left-0 w-full h-screen bg-[#1a1a10] text-[#e5dcc2] py-20 px-6 sm:px-10 lg:px-20 z-50 shadow-2xl"
         >
           {/* Close Button */}
           <button
@@ -25,7 +25,7 @@ const Footer = ({ isVisible, setIsVisible }) => {
             {/* Left Section (Navigation) */}
             <nav className="space-y-4 text-lg">
               {["HOME", "ABOUT", "PROJECT", "SUSTAINABILITY", "SERVICE", "JOURNAL", "CONTACT"].map((item, index) => (
-                <motion.p
+                <motion.button
                   key={index}
                   className="flex items-center space-x-2 cursor-pointer"
                   whileHover={{ scale: 1.1, opacity: 0.8 }}
@@ -33,7 +33,7 @@ const Footer = ({ isVisible, setIsVisible }) => {
                 >
                   <span className="text-sm">({index + 1})</span>
                   <span className="hover:underline">{item}</span>
-                </motion.p>
+                </motion.button>
               ))}
             </nav>
 

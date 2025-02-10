@@ -1,12 +1,22 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import ServiceSection from "./ServiceSection";
 
-// Main Component
 const CustomGlassInstallations = () => {
+  const navigate = useNavigate();
+
   return (
-    <>
+    <motion.div 
+      initial={{ opacity: 0, x:0 }} 
+      animate={{ opacity: 1 }} 
+      exit={{ opacity: 0 }} 
+      transition={{ duration: 0.8 }}
+      className="min-h-screen flex flex-col items-center bg-gray-100 py-10"
+    >
+   
+
       <ServiceSection
-     
         title="CUSTOM GLASS INSTALLATIONS"
         description="From elegant shower enclosures to sleek office partitions, we craft and install high-quality glass features that enhance both aesthetics and functionality."
         services={[
@@ -47,7 +57,7 @@ const CustomGlassInstallations = () => {
           "https://i.pinimg.com/736x/9e/15/79/9e157939a41bcf1259944df465c6b869.jpg",
         ]}
       />
-    </>
+    </motion.div>
   );
 };
 

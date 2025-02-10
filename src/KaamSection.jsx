@@ -1,7 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const KaamSection = () => {
+  const navigate = useNavigate()
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center bg-[#D8E4FC] px-5 md:px-10 relative">
       {/* Left Text Section */}
@@ -74,6 +76,7 @@ const KaamSection = () => {
           className="border border-black px-5 py-2 mt-4 rounded-full text-sm hover:bg-black hover:text-white transition-all"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={()=> navigate('/Services')}
         >
           OUR SERVICE
         </motion.button>

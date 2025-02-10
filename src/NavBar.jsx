@@ -1,24 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import { motion } from "framer-motion";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const [isFooterVisible, setIsFooterVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Scroll Event Listener
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setIsVisible(false); // Hide on scroll down
+      } else {
+        setIsVisible(true); // Show on scroll up
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll());
+    return () => window.removeEventListener("scroll", handleScroll);
+    
+  }, [lastScrollY]);
 
   return (
     <>
       {/* Navbar */}
       <motion.nav 
-        className="w-full h-20 flex items-center justify-between px-6 sm:px-12 lg:px-20 border-b-2 bg-white fixed top-0 left-0 right-0 shadow-md z-50"
+        className="w-full h-20 flex items-center justify-between px-6 sm:px-12 lg:px-20 border-b-2 bg-transparent fixed top-0 left-0 right-0 shadow-md z-50"
         initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : -100 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
       >
         {/* Logo */}
         <motion.div 
           className="text-2xl font-bold text-gray-800 cursor-pointer"
           whileHover={{ scale: 1.05 }}
+          onClick={() => navigate("/")}
         >
           Planet Glass
         </motion.div>
