@@ -12,7 +12,9 @@ const FeaturesSection = () => {
   const navigate = useNavigate();
   const project = projects.find((p) => p.id === parseInt(id));
 
+  console.log( id)
   if (!project) return <p className="text-center text-lg">Project not found</p>;
+
 
   return (
     <div className="min-h-screen bg-[#F5EAD5] flex flex-col items-center justify-center px-4 py-8 md:px-10 md:py-12 lg:px-16">

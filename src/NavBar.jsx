@@ -18,13 +18,13 @@ const NavBar = () => {
       } else {
         setIsVisible(true); // Show on scroll up
       }
-      setLastScrollY(window.scrollY);
+      setLastScrollY(0);
     };
 
-    window.addEventListener("scroll", handleScroll());
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
     
-  }, [lastScrollY]);
+  }, []);
 
   return (
     <>

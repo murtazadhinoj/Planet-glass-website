@@ -11,6 +11,7 @@ import Footer from "./Footer";
 // import Aboutproject from "./Aboutproject"  // Import Project Showcase component
 import FeaturesSection from "./FeatureSection"; // Import Project Details component
 import GetInTouch from "./GetInTouch";
+import AboutCompany from "./AboutCompany";
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
           element={
             <>
               <HeroSection />
+              <AboutCompany/>
               <Herosection2 />
               <Aboutproject />
               <KaamSection />

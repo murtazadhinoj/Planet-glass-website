@@ -1,97 +1,59 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const Herosection2 = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax effect for images
+  const leftImageY = useTransform(scrollYProgress, [0, 1], ["-30%", "-45%"]);
+  const mainImageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const rightImageY = useTransform(scrollYProgress, [0, 1], ["35%", "-35%"]);
+
   return (
-    <div className="w-full min-h-screen flex flex-col items-center bg-gray-100 px-6 md:px-16 py-10 gap-16">
-      
-      {/* First Section */}
-      <div className="w-full flex flex-col md:flex-row items-center justify-between gap-10">
-        
-        {/* Left Text */}
-        <div className="w-full md:w-1/3 flex flex-col gap-10">
-            <h1 className="text-3xl md:text-5xl font-bold">TRADITION</h1>
-          <h2 className="text-4xl md:text-5xl font-semibold leading-tight">
-            Every Line <br /> Tells a Story
-          </h2>
-        </div>
+    <>
+   
+    <div ref={containerRef} className="bg-orange-300 min-h-screen flex flex-col md:flex-row items-center justify-center gap-8 px-6 md:px-16 py-20 overflow-hidden">
+      {/* Left Image */}
+      <motion.div
+        className="w-[200px] h-[300px] mt-10 md:w-[250px] md:h-[400px] lg:w-[250px] lg:h-[280px] overflow-hidden shadow-lg lg:mt-72 lg:mr-20"
+        style={{ y: leftImageY }}
+      >
+        <img
+          src="https://i.pinimg.com/736x/56/8e/a8/568ea8bc5b2b7661714f0e3b8697e300.jpg"
+          alt="Left Image"
+          className="object-cover w-full h-full"
+        />
+      </motion.div>
 
-        {/* Center Image with Parallax */}
-        <motion.div 
-          className="w-full md:w-[600px] overflow-hidden rounded-lg"
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          <img
-            className="w-full h-auto object-cover"
-            src="https://i.pinimg.com/736x/82/86/96/82869653b79c03fd2af7f7c0dd7afffe.jpg"
-            alt="Tradition"
-          />
-        </motion.div>
+      {/* Middle Image (Main) */}
+      <motion.div
+        className="w-[250px] h-[350px] md:w-[350px] md:h-[500px] lg:w-[450px] lg:h-[600px] overflow-hidden shadow-2xl"
+        style={{ y: mainImageY }}
+      >
+        <img
+          src="https://i.pinimg.com/736x/56/8e/a8/568ea8bc5b2b7661714f0e3b8697e300.jpg"
+          alt="Main Image"
+          className="object-cover w-full h-full"
+        />
+      </motion.div>
 
-        {/* Right Content */}
-          <div className="w-full md:w-1/3 flex flex-col gap-6">
-            <p className="text-md md:text-lg leading-relaxed">
-              At Planet Glass, we specialize in exquisite glass works, ensuring perfection in every piece. Our dedication to craftsmanship and attention to detail make us a leader in the industry, delivering unparalleled quality and beauty in all our projects.
-            </p>
-            <button className="border-2 border-black rounded-xl py-3 px-6 hover:bg-black hover:text-white transition-all">
-              About us
-            </button>
-          </div>
-              </div>
-
-              {/* Second Section */}
-      <div className="w-full flex flex-col md:flex-row items-center justify-center gap-8">
-        
-        {/* Left Small Image */}
-        <motion.div 
-          className="w-40 md:w-48 h-28 overflow-hidden rounded-lg"
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-        >
-          <img
-            className="w-full h-full object-cover"
-            src="https://i.pinimg.com/736x/82/86/96/82869653b79c03fd2af7f7c0dd7afffe.jpg"
-            alt="Innovation"
-          />
-        </motion.div>
-
-        {/* Center Large Image */}
-        <motion.div 
-          className="w-full md:w-[550px] h-[600px] flex flex-col items-center relative overflow-hidden rounded-lg"
-          initial={{ scale: 1.1 }}
-          whileInView={{ scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          <img
-            className="w-full h-full object-cover"
-            src="https://i.pinimg.com/736x/82/86/96/82869653b79c03fd2af7f7c0dd7afffe.jpg"
-            alt="Innovation"
-          />
-          <h1 className="absolute bottom-4 text-white text-lg font-bold bg-black bg-opacity-50 px-4 py-2 rounded-md">
-            (Innovation)
-          </h1>
-        </motion.div>
-
-        {/* Right Small Image */}
-        <motion.div 
-          className="w-40 md:w-[250px] h-[150px] overflow-hidden rounded-lg"
-          initial={{ y: -50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-        >
-          <img
-            className="w-full h-full object-cover"
-            src="https://i.pinimg.com/736x/c9/fd/18/c9fd186b22966b53da5fe40bddc62c1e.jpg"
-            alt="Modern Design"
-          />
-        </motion.div>
-
-      </div>
+      {/* Right Image */}
+      <motion.div
+        className="w-[200px] h-[300px] md:w-[250px] md:h-[400px] lg:w-[300px] lg:h-[330px] overflow-hidden shadow-lg lg:mt-72 lg:ml-20"
+        style={{ y: rightImageY }}
+      >
+        <img
+          src="https://i.pinimg.com/736x/56/8e/a8/568ea8bc5b2b7661714f0e3b8697e300.jpg"
+          alt="Right Image"
+          className="object-cover w-full h-full"
+        />
+      </motion.div>
     </div>
+    </>
   );
 };
 
