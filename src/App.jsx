@@ -8,13 +8,16 @@ import KaamSection from "./KaamSection";
 import ContactForm from "./ContactForm";
 import CustomGlassInstallations from "./CustomGlassInstallations";
 import Footer from "./Footer";
-// import Aboutproject from "./Aboutproject"  // Import Project Showcase component
+// import Aboutproject from "./About  project"  // Import Project Showcase component
 import FeaturesSection from "./FeatureSection"; // Import Project Details component
 import GetInTouch from "./GetInTouch";
 import AboutCompany from "./AboutCompany";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+// ..
 
 const App = () => {
+  AOS.init();
   return (
     <Router>
       <NavBar /> 
@@ -34,7 +37,7 @@ const App = () => {
              
             </>
           } 
-        />
+          />
         <Route path="/JoinUs" element={<ContactForm/>}/>
         <Route path="/project/:id" element={<><FeaturesSection/></>} />
         <Route path="/Services" element={<CustomGlassInstallations/>}/>
