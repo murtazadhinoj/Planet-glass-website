@@ -13,8 +13,8 @@ import FeaturesSection from "./FeatureSection"; // Import Project Details compon
 import GetInTouch from "./GetInTouch";
 import AboutCompany from "./AboutCompany";
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // You can also use <link> for styles
-// ..
+import 'aos/dist/aos.css'; 
+import LocomotiveScroll from "locomotive-scroll";
 
 const App = () => {
   AOS.init();
@@ -28,18 +28,19 @@ const App = () => {
           path="/" 
           element={
             <>
-              <HeroSection />
+              {/* <HeroSection />
               <AboutCompany/>
               <Herosection2 />
               <Aboutproject />
               <KaamSection />
-              <GetInTouch/>
+              <GetInTouch/> */}
+              <FeaturesSection/>
              
             </>
           } 
           />
         <Route path="/JoinUs" element={<ContactForm/>}/>
-        <Route path="/project/:id" element={<><FeaturesSection/></>} />
+        {/* <Route path="/project/:id" element={<><FeaturesSection/></>} /> */}
         <Route path="/Services" element={<CustomGlassInstallations/>}/>
       </Routes>
           <Footer/>

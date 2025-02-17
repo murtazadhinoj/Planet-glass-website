@@ -1,88 +1,76 @@
-import { useState, useEffect } from "react";
 import React from "react";
 import { motion } from "framer-motion";
-import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 
-const NavBar = () => {
+const fadeIn = (direction = "up", delay = 0) => {
+  return {
+    hidden: { opacity: 0, y: direction === "up" ? 40 : -40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay } },
+  };
+};
+
+const GetInTouch = () => {
   const navigate = useNavigate();
-  const [isFooterVisible, setIsFooterVisible] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  let lastScrollY = window.scrollY; // Track last scroll position
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        setIsVisible(false); // Hide navbar on scroll down
-      } else {
-        setIsVisible(true); // Show navbar on scroll up
-      }
-
-      lastScrollY = currentScrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
-    <>
-      {/* Navbar */}
-      <motion.nav
-        className="w-full h-20 flex items-center justify-between px-6 sm:px-12 lg:px-20 border-b-2 bg-transparent fixed top-0 left-0 right-0 shadow-md z-50 transition-transform duration-300"
-        style={{
-          transform: isVisible ? "translateY(0)" : "translateY(-100%)",
-          transition: "transform 0.3s ease-in-out",
-        }}
+    <div className="min-h-screen bg-[#F5EAD5] flex flex-col lg:flex-row items-center justify-center px-6 lg:px-20 py-20 space-y-10 lg:space-y-0 lg:space-x-16">
+      
+      {/* Left Section */}
+      <motion.div 
+        variants={fadeIn("left", 0.2)} 
+        initial="hidden" 
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="w-full lg:w-1/3 text-center lg:text-left"
       >
-        {/* Logo */}
-        <motion.div
-          className="text-2xl font-bold text-gray-800 cursor-pointer"
+        <h2 className="text-5xl lg:text-6xl font-serif text-black">हमसे जुड़ें</h2>
+        <h3 className="text-2xl font-serif mt-2 text-black">(गुणवत्ता, उत्कृष्ट)</h3>
+        <p className="text-lg mt-3 text-gray-700 tracking-wide">जोड़ना</p>
+      </motion.div>
+
+      {/* Middle Section */}
+      <motion.div 
+        variants={fadeIn("up", 0.4)} 
+        initial="hidden" 
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="w-full lg:w-1/3 text-center"
+      >
+        <h1 className="text-4xl lg:text-7xl font-serif text-black leading-snug">
+          CRAFT YOUR VISION
+        </h1>
+        <p className="text-lg mt-4 text-gray-700 max-w-md mx-auto leading-relaxed">
+          Saisei blends innovation and sustainability to craft spaces that stand 
+          out and stand for something. Let’s bring your vision to life with 
+          thoughtful, modern design.
+        </p>
+
+        <motion.button
           whileHover={{ scale: 1.05 }}
-          onClick={() => navigate("/")}
+          whileTap={{ scale: 0.95 }}
+          className="mt-6 px-8 py-3 bg-[#8C6A4F] text-white rounded-full font-semibold tracking-wide shadow-md transition-all duration-300 hover:bg-[#6A4F3E]"
+          onClick={()=> navigate('/JoinUs') }
         >
-          Planet Glass
-        </motion.div>
+          GET IN TOUCH
+        </motion.button>
+      </motion.div>
 
-        {/* Centered Section */}
-        <motion.div className="hidden sm:flex items-center space-x-8">
-          <motion.h1 className="text-lg font-medium text-gray-700">
-            Est-2020
-          </motion.h1>
-        </motion.div>
-
-        {/* Menu Icon (Opens Footer) */}
-        <motion.div
-          className="cursor-pointer flex items-center justify-center p-2 hover:bg-gray-200 rounded-lg transition-all"
-          whileTap={{ scale: 0.9 }}
-        >
-          <button onClick={() => setIsFooterVisible(true)}>
-            <svg
-              className="w-8 h-8 text-gray-800"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 6h12M6 12h12M6 18h12"
-              />
-            </svg>
-          </button>
-        </motion.div>
-      </motion.nav>
-
-      {/* Footer Component */}
-      <Footer isVisible={isFooterVisible} setIsVisible={setIsFooterVisible} />
-    </>
+      {/* Right Section */}
+      <motion.div 
+        variants={fadeIn("right", 0.6)} 
+        initial="hidden" 
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="w-full lg:w-1/3 flex justify-center"
+      >
+        <img 
+          src="https://i.pinimg.com/736x/c2/05/4e/c2054eb26c1a7cf9fc9679cdcb12d214.jpg" 
+          alt="Japanese Zen Room" 
+          className="rounded-xl shadow-xl w-full max-w-md transform hover:scale-105 transition-transform duration-500"
+        />
+      </motion.div>
+      
+    </div>
   );
 };
 
-export default NavBar;
+export default GetInTouch;
