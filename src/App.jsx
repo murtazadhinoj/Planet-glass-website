@@ -16,6 +16,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 import LocomotiveScroll from "locomotive-scroll";
 import ProjectDetails from "./ProjectDetails";
+import AboutUs from "./AboutUs";
 
 const App = () => {
   AOS.init();
@@ -43,9 +44,10 @@ const App = () => {
         <Route path="/JoinUs" element={<ContactForm/>}/>
         <Route path="details/:id" element={<ProjectDetails/>}/>
         <Route path="/project" element={<><FeaturesSection/></>} />
+        <Route path ="/aboutUs" element={<AboutUs/>}/>
         <Route path="/Services" element={<CustomGlassInstallations/>}/>
       </Routes>
-        <Footer/>
+      <Footer/>
     </Router>
   );
 };

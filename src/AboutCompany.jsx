@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const AboutCompany = () => {
+  const navigate = useNavigate();
   return (
     <div className="container mx-auto px-6 md:px-12 lg:px-20 py-16 flex flex-col md:flex-row items-center justify-between min-h-screen">
       {/* Left Section */}
@@ -37,6 +39,7 @@ const AboutCompany = () => {
           whileHover={{ scale: 1.05 }} 
           whileTap={{ scale: 0.95 }}
           className="bg-gray-800 text-white py-3 px-6 rounded-full text-lg font-medium transition duration-300 hover:bg-gray-600 lg:ml-25"
+          onClick={() => navigate("/aboutUs")}
         >
           About Us
         </motion.button>

@@ -28,10 +28,13 @@ const NavBar = () => {
   }, [lastScrollY]);
 
   return (
+    <div>
+
     <motion.nav
-      className="fixed top-0 left-0 w-full h-20 flex items-center justify-between px-6 sm:px-12 lg:px-20 bg-transparent shadow-md border-b z-50 transition-all"
+      className="fixed top-0 left-0 w-full h-20 flex items-center justify-between px-6 sm:px-12 lg:px-20 bg-transparent border-b-2 z-50 transition-all"
       initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : -100 }}
+      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : -100  }}
+      
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
       {/* Logo */}
@@ -73,6 +76,8 @@ const NavBar = () => {
         </svg>
       </motion.button>
     </motion.nav>
+    
+    </div>
   );
 };
 
