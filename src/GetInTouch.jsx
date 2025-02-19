@@ -25,6 +25,9 @@ const GetInTouch = () => {
         <h2 className="text-5xl lg:text-6xl font-serif text-black">हमसे जुड़ें</h2>
         <h3 className="text-2xl font-serif mt-2 text-black">(गुणवत्ता, उत्कृष्ट)</h3>
         <p className="text-lg mt-3 text-gray-700 tracking-wide">जोड़ना</p>
+
+
+        <div className="img mt-45 w-[21vw]"><img src="./src/assets/heroImg2.jpg" alt="" /> </div>
       </motion.div>
 
       {/* Middle Section */}
@@ -60,12 +63,12 @@ const GetInTouch = () => {
         initial="hidden" 
         whileInView="visible"
         viewport={{ once: true }}
-        className="w-full lg:w-1/3 flex justify-center"
+        className="w-[50vw] lg:w-1/3 flex justify-center"
       >
         <img 
           src="https://i.pinimg.com/736x/c2/05/4e/c2054eb26c1a7cf9fc9679cdcb12d214.jpg" 
           alt="Japanese Zen Room" 
-          className="rounded-xl shadow-xl w-full max-w-md transform hover:scale-105 transition-transform duration-500"
+          className=" shadow-xl w-full max-w-md transform hover:scale-105 transition-transform duration-500"
         />
       </motion.div>
       

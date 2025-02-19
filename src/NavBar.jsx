@@ -1,83 +1,104 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React from "react";
+import { delay, motion } from "framer-motion";
+import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
+import { del } from "framer-motion/client";
+import NavigationPanel from "./NavigationPanel";
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(window.scrollY);
-
-  // Optimized Scroll Event
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  // Scroll Event Listener
   useEffect(() => {
-    let timer;
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
-        setIsVisible(false); // Hide when scrolling down
+        setIsVisible(false); // Hide on scroll down
       } else {
-        setIsVisible(true); // Show when scrolling up
+        setIsVisible(true); // Show on scroll up
       }
       setLastScrollY(window.scrollY);
-
-      // Debounce for better performance
-      clearTimeout(timer);
-      timer = setTimeout(() => setLastScrollY(window.scrollY), 150);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  const toggeleNavigationPanel = () =>{
+    setIsPanelOpen(!isPanelOpen);
+  }
+
   return (
-    <div>
-
-    <motion.nav
-      className="fixed top-0 left-0 w-full h-20 flex items-center justify-between px-6 sm:px-12 lg:px-20 bg-transparent border-b-2 z-50 transition-all"
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : -100  }}
-      
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-    >
-      {/* Logo */}
-      <motion.div
-        className="text-2xl font-bold text-black cursor-pointer"
-        whileHover={{ scale: 1.05 }}
-        onClick={() => navigate("/")}
+    <>
+      {/* Navbar */}
+      <motion.nav
+        className=" w-[100vw]   flex justify-between bg-transparent
+         fixed top-0 left-0 right-0 z-50
+       lg:w-full  lg:h-27 lg:flex lg:items-center lg:justify-between lg:px-6 sm:px-12 lg:px-20  lg:fixed lg:top-0 lg:left-0 lg:right-0  lg:z-50 "
+       
       >
-        Planet Glass
-      </motion.div>
+        {/* Bottom Border Animation */}
+        <motion.div
+          className="absolute bottom-0 left-0 h-[2px] bg-amber-200"
+          initial={{ width: "0vw" }}
+          animate={{ width: "100vw" }}
+          transition={{ duration: 1, ease: "easeInOut", delay: 1.5 }}
+        ></motion.div>
 
-      {/* Centered Section */}
-      <motion.div className="hidden sm:flex items-center space-x-8">
-        <motion.h1
-          className="text-lg font-medium text-gray-700"
-          whileHover={{ scale: 1.1, color: "#000" }}
+        {/* Logo */}
+        <motion.div
+          className="logo"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 1}}
         >
-          Est-2020
-        </motion.h1>
-      </motion.div>
+          <img src="./src/assets/output.png" alt="Logo" width="70" height="70" />
+        </motion.div>
 
-      {/* Menu Icon */}
-      <motion.button
-        className="p-2 rounded-lg transition-all hover:bg-gray-200"
-        whileTap={{ scale: 0.9 }}
-      >
-        <svg
-          className="w-8 h-8 text-gray-800"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
+        {/* Nav Button */}
+        <motion.div
+          className="navButton flex justify-around items-center w-1/4
+          lg:flex lg:justify-between lg:items-center lg:w-1/4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 1.2 }}
         >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M6 6h12M6 12h12M6 18h12"
-          />
-        </svg>
-      </motion.button>
-    </motion.nav>
-    
-    </div>
+          <motion.div
+            className="text text-amber-50 max-sm:hidden"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 1.3 }}
+          >
+            EST - 2020
+          </motion.div>
+
+          {/* Animated Button */}
+          <motion.div
+            className="button w-8 cursor-pointer"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+            whileHover={{ scale: 1.1 }}
+            onClick={toggeleNavigationPanel}
+            
+          >
+            <motion.hr
+              className="w-full bg-amber-50 mt-2 h-[1.5px]"
+             
+            />
+            <motion.hr
+              className="w-3/4 bg-amber-50 mt-2 h-[3.1px]"
+              
+            />
+          </motion.div>
+        </motion.div>
+      </motion.nav>
+
+      {isPanelOpen && <NavigationPanel onClose={toggeleNavigationPanel}/>}
+    </>
   );
 };
 

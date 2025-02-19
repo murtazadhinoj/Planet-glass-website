@@ -17,11 +17,31 @@ import 'aos/dist/aos.css';
 import LocomotiveScroll from "locomotive-scroll";
 import ProjectDetails from "./ProjectDetails";
 import AboutUs from "./AboutUs";
+import { useEffect } from "react";
+import { useState } from "react";
+import LoadingScreen from "./LoadingScreen[1]";
+
 
 const App = () => {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  }, []);
+
   AOS.init();
   return (
-    <Router>
+    
+<>
+    
+<Router>
+  {loading ? (
+      <LoadingScreen />
+    ) : (
+      <>
       <NavBar /> 
       {/* Navbar stays the same for all pages */}
       <Routes>
@@ -41,6 +61,7 @@ const App = () => {
             </>
           } 
           />
+        
         <Route path="/JoinUs" element={<ContactForm/>}/>
         <Route path="details/:id" element={<ProjectDetails/>}/>
         <Route path="/project" element={<><FeaturesSection/></>} />
@@ -48,7 +69,9 @@ const App = () => {
         <Route path="/Services" element={<CustomGlassInstallations/>}/>
       </Routes>
       <Footer/>
+      </>)}
     </Router>
+    </>
   );
 };
 
