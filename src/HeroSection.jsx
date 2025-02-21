@@ -14,12 +14,15 @@ const HeroSection = () => {
 
   return (
     <div 
+
       className="relative w-[100vw] h-[100vh] flex items-center justify-between bg-cover bg-center px-6 md:px-16 overflow-hidden
-      lg:w-[100vw] lg:h-[100vh] lg:flex lg:items-center lg:justify-between lg:bg-cover lg:bg-center lg:px-6 lg:md:px-16"
-      style={{ backgroundImage: "url('./src/assets/heroImg2.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
+      md:flex-col md:items-start md:justify-center
+      lg:w-full  lg:h-[100vh] lg:flex lg:items-center lg:justify-between lg:bg-cover lg:bg-center lg:px-6 lg:md:px-16"
+      style={{ backgroundImage: "url('./src/assets/heroImg2.jpg')", backgroundSize: "cover", backgroundPosition: "center" , overflow:"hidden"}}
     >
       {/* Video Section (Main Brand Visual) */}
-      <div className="absolute -left-20 top-120 w-[140%]  
+      <div className="absolute -left-20 top-120 w-[140%] 
+                      md:w-full 
                       lg:right-125 lg:top-90 lg:w-[75%]">
         <video 
           src="Comp 1_4.mp4" 

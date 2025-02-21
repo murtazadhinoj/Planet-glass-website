@@ -23,11 +23,11 @@ const GetInTouch = () => {
         className="w-full lg:w-1/3 text-center lg:text-left"
       >
         <h2 className="text-5xl lg:text-6xl font-serif text-black">हमसे जुड़ें</h2>
-        <h3 className="text-2xl font-serif mt-2 text-black">(गुणवत्ता, उत्कृष्ट)</h3>
+        <h3 className="text-2xl font-serif lg:mt-2 mt-5 text-black">(गुणवत्ता, उत्कृष्ट)</h3>
         <p className="text-lg mt-3 text-gray-700 tracking-wide">जोड़ना</p>
 
 
-        <div className="img mt-45 w-[21vw]"><img src="./src/assets/heroImg2.jpg" alt="" /> </div>
+        <div className="img max-sm:mt-5 lg:mt-45 lg:w-[21vw]"><img src="./src/assets/heroImg2.jpg" alt="" /> </div>
       </motion.div>
 
       {/* Middle Section */}
@@ -36,7 +36,7 @@ const GetInTouch = () => {
         initial="hidden" 
         whileInView="visible"
         viewport={{ once: true }}
-        className="w-full lg:w-1/3 text-center"
+        className="w-full lg:w-1/3 text-left"
       >
         <h1 className="text-4xl lg:text-7xl font-serif text-black leading-snug">
           CRAFT YOUR VISION
@@ -68,7 +68,7 @@ const GetInTouch = () => {
         <img 
           src="https://i.pinimg.com/736x/c2/05/4e/c2054eb26c1a7cf9fc9679cdcb12d214.jpg" 
           alt="Japanese Zen Room" 
-          className=" shadow-xl w-full max-w-md transform hover:scale-105 transition-transform duration-500"
+          className=" shadow-xl w-full max-w-md transform hover:scale-105 transition-transform duration-500 max-sm:hidden"
         />
       </motion.div>
       
