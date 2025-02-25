@@ -4,8 +4,8 @@ import { easeIn, motion } from "framer-motion";
 function LoadingScreen() {
   return (
     <motion.div
-      className="mainloader bg-[#deb76b] h-[100vh] w-[100vw] flex justify-center fixed top-0 left-0"
-      initial={{ backgroundColor: "#deb76b" }}
+      className="mainloader bg-[#D0EBE4] h-[100vh] w-[100vw] flex justify-center fixed top-0 left-0"
+      initial={{ backgroundColor: "#D0EBE4" }}
       animate={{ backgroundColor: "#ffffff" }}
       transition={{ delay: 2.5, duration: 0.2, ease: [0.855, 0.015, 1.000, 0.530]}}
     >
@@ -86,13 +86,13 @@ function LoadingScreen() {
         transition={{ delay: 2.5 }}
       >
         <motion.div
-          className="leftWindow bg-[#deb76b] h-[100vh] w-[50vw]"
+          className="leftWindow bg-[#D0EBE4] h-[100vh] w-[50vw]"
           initial={{ x: "0vw" }}
           animate={{ x: "-100vw" }}
           transition={{ delay: 2.5, duration: 1.5, ease: [0.855, 0.015, 1.000, 0.530]}}
         ></motion.div>
         <motion.div
-          className="rightWindow bg-[#deb76b] h-[100vh] w-[50vw]"
+          className="rightWindow bg-[#D0EBE4] h-[100vh] w-[50vw]"
           initial={{ x: "0vw" }}
           animate={{ x: "100vw" }}
           transition={{ delay: 2.5, duration: 1.5, ease: [0.855, 0.015, 1.000, 0.530]}}

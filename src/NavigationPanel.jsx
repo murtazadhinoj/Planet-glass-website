@@ -36,30 +36,37 @@ function NavigationPanel({ onClose }) {
   // Hover effects
   const hoverEffects = {
     scale: 1.02,
-    backgroundColor: "#fbbf24",
+    backgroundColor: "#607f92",
     borderBottomWidth: "3px",
-    borderBottomColor: "#ff7300",
+    borderBottomColor: "#99c9e7",
     transition: { ease: [0.33, 1, 0.68, 1], duration: 0.7 },
   };
   
 
-  const sections = ["HOME", "ABOUT", "PROJECT", "SERVICE", "SUSTAIN", "JOURNAL"];
+  const sections = [
+    { title: "HOME", link: "/" },
+  { title: "ABOUT", link: "/aboutUS" },
+  { title: "PROJECT", link: "/project" },
+  { title: "SERVICE", link: "/services" },
+  { title: "SUSTAIN", link: "/sustainability" },
+  { title: "JOURNAL", link: "/journal" }
+  ];
 
   return (
     <motion.div
       className="NavPage
-       max-sm:bg-yellow-700
+       max-sm:bg-[#99c9e7]
        
        lg:w-[100vw] lg:h-[100vh] lg:flex lg:fixed top-0 left-0 z-50"
       initial="hidden"
       animate="visible"
     >
-      <motion.div className="leftside bg-amber-900  max-sm:w-[100vw] max-sm:h-[50vh] sm:flex-col
+      <motion.div className="leftside bg-[#D0EBE4]  max-sm:w-[100vw] max-sm:h-[50vh] sm:flex-col
       md:w-[50vw] md:h-[100vh] md:flex-col md:z-20
       lg:w-[50vw] lg:h-[100vh] lg:flex-col lg:z-20" variants={panelVariants}>
-        {sections.map((title, index) => (
+        {sections.map((item, index) => (
           <motion.div
-            key={title}
+            key={item.title}
             className=" max-sm:w-[100vw] max-sm:h-[8.3vh]  max-sm:border-b-2 max-sm:flex max-sm:justify-between max-sm:items-center 
             md:w-[50vw] md:h-[16.6vh]  md:border-b-2 md:flex md:justify-between md:items-center md:relative md:overflow-hidden
             lg:w-[50vw] lg:h-[16.6vh]  lg:border-b-2 lg:flex lg:justify-between lg:items-center lg:relative lg:overflow-hidden"
@@ -79,7 +86,7 @@ function NavigationPanel({ onClose }) {
                lg:flex lg:w-[35%] lg:gap-x-5 h-[100%]  lg:justify-between lg:items-center lg:ml-10"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay:0.1, duration: 0.7, delay:index * 0.5 }}
+              transition={{ duration: 0.7, delay:index * 0.5 }}
             >
               <p>({index + 1})</p>
               <motion.p
@@ -88,14 +95,16 @@ function NavigationPanel({ onClose }) {
                 md:text-5xl "
                 whileHover={{ x: 25, transition: { duration: 0.6 } }}
               >
-                {title}
+                <a href={item.link}>{item.title}</a>
+                
+
               </motion.p>
             </motion.div>
           </motion.div>
         ))}
       </motion.div>
 
-      <motion.div className="rightSide bg-orange-600  w-[100vw] h-[50vh] flex flex-col justify-center items-center
+      <motion.div className="rightSide bg-[#3d7b6a]    w-[100vw] h-[50vh] flex flex-col justify-center items-center
       md:w-[50vw] md:h-[100vh] md:flex md:flex-col md:justify-center md:items-center
       lg:w-[50vw] lg:h-[100vh] lg:flex lg:flex-col lg:justify-center lg:items-center
       "

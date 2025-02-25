@@ -20,7 +20,7 @@ import AboutUs from "./AboutUs";
 import { useEffect } from "react";
 import { useState } from "react";
 import LoadingScreen from "./LoadingScreen[1]";
-
+import ScrollToTop from "./ScrollToTop";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -42,6 +42,7 @@ const App = () => {
       <LoadingScreen />
     ) : (
       <>
+      <ScrollToTop/>
       <NavBar /> 
       {/* Navbar stays the same for all pages */}
       <Routes>
@@ -53,7 +54,7 @@ const App = () => {
               <HeroSection />
               <AboutCompany/>
               <Herosection2 />
-              <Aboutproject />
+              {/* <Aboutproject /> */}
               <KaamSection />
               <GetInTouch/>
               {/* <FeaturesSection/> */}

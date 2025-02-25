@@ -1,132 +1,148 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// ✅ Manually define `wrap()` function (Fixes the issue)
+const wrap = (min, max, value) => {
+  const range = max - min;
+  return ((((value - min) % range) + range) % range) + min;
+};
+
 const ProjectShowcase = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
+  const [[page, direction], setPage] = useState([0, 0]);
 
   const projects = [
     {
       id: 1,
-      title: "Shizuka Gardens",
-      image:
-        "https://i.pinimg.com/736x/56/8e/a8/568ea8bc5b2b7661714f0e3b8697e300.jpg",
-      background:
-        "https://i.pinimg.com/736x/52/17/57/521757577a4065264e8ca486e842f977.jpg",
+      title: " Architectural Glasses ",
+      image: "src/assets/images/Architecture1.png",
+      background: "src/assets/images/Architecture2.jpg",
     },
     {
       id: 2,
-      title: "Kawa Lofts",
-      image:
-        "https://i.pinimg.com/736x/52/17/57/521757577a4065264e8ca486e842f977.jpg",
-      background:
-        "https://i.pinimg.com/736x/98/93/8e/98938e1d6482cd498111d4f8c0d6eb6e.jpg",
+      title: "PDLC Switchable Smart Glass",
+      image: "src/assets/images/PDLC2.png",
+      background: "src/assets/images/PDLC1.png",
     },
     {
       id: 3,
-      title: "Kinsei Pavilion",
-      image:
-        "https://i.pinimg.com/736x/98/93/8e/98938e1d6482cd498111d4f8c0d6eb6e.jpg",
-      background:
-        "https://i.pinimg.com/736x/56/8e/a8/568ea8bc5b2b7661714f0e3b8697e300.jpg",
+      title: " Modular Kitchen Glasses ",
+      image: "src/assets/images/Modular2.png",
+      background: "src/assets/images/Modular1.png",
     },
   ];
 
-  const nextProject = () => {
-    setDirection(1);
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+  const index = wrap(0, projects.length, page); // ✅ Fixed: Uses manually defined wrap()
+
+  const variants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
+    center: { x: 0, opacity: 1 },
+    exit: (direction) => ({
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
   };
 
-  const prevProject = () => {
-    setDirection(-1);
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? projects.length - 1 : prevIndex - 1
-    );
+  const changeProject = (newDirection) => {
+    setPage([page + newDirection, newDirection]);
   };
 
   return (
-    <motion.div
-      className="relative w-full h-screen flex items-center justify-center overflow-hidden"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      {/* Background Image with Smooth Back-to-Back Sliding Animation */}
-      <div className="absolute inset-0 w-full h-full flex">
-        <AnimatePresence mode="popLayout">
+    <motion.div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+      {/* Background Image with Sliding Effect */}
+      <div className="absolute inset-0 w-full h-full">
+        <AnimatePresence custom={direction}>
           <motion.div
-            key={projects[currentIndex].background}
+            key={projects[index].background}
             className="absolute w-full h-full bg-cover bg-center"
-            style={{ backgroundImage: `url(${projects[currentIndex].background})` }}
-            initial={{ x: direction * 100 + "%", opacity: 1 }}
-            animate={{ x: "0%", opacity: 1 }}
-            exit={{ x: -direction * 100 + "%", opacity: 1 }}
+            style={{ backgroundImage: `url(${projects[index].background})` }}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            variants={variants}
+            custom={direction}
             transition={{ duration: 1.2, ease: "easeInOut" }}
           />
         </AnimatePresence>
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center bg-black/50 backdrop-blur-md p-8 rounded-lg shadow-xl text-white max-w-lg">
-        <motion.h2
-          className="text-4xl font-bold"
-          key={projects[currentIndex].title}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+      {/* Navigation Buttons */}
+      <div className="absolute top-20 left-5 lg:top-35 lg:left-20 flex space-x-4 z-20">
+        <motion.button
+          className="text-white text-2xl font-semibold transition-all duration-300 hover:opacity-70 hover:scale-105"
+          onClick={() => changeProject(-1)}
+          whileTap={{ scale: 0.9 }}
         >
-          {projects[currentIndex].title}
-        </motion.h2>
+          Prev
+        </motion.button>
 
-        {/* Project Indicator (Modern Progress Bar) */}
-        <div className="w-full h-1 bg-gray-600 rounded-full mt-2 relative">
-          <motion.div
-            className="absolute left-0 top-0 h-full bg-white rounded-full"
-            initial={{ width: "0%" }}
-            animate={{ width: `${((currentIndex + 1) / projects.length) * 100}%` }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-          />
-        </div>
+        <motion.button
+          className="text-white text-2xl font-semibold transition-all duration-300 hover:opacity-70 hover:scale-105"
+          onClick={() => changeProject(1)}
+          whileTap={{ scale: 0.9 }}
+        >
+          Next
+        </motion.button>
+      </div>
 
-        {/* Image Animation with Smooth Sliding Effect */}
-        <div className="mt-6 w-[400px] h-[300px] rounded-lg overflow-hidden shadow-lg relative">
-          <AnimatePresence mode="popLayout">
+      {/* Main Image with Sliding Effect & Drag Support */}
+      <div className="relative z-10 flex flex-col items-center w-full max-w-3xl px-4 sm:px-8">
+        <motion.div
+          className="relative w-full max-w-3xl h-[60vh] sm:h-[70vh] md:h-[75vh] rounded-lg overflow-hidden shadow-lg cursor-grab"
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.3}
+          onDragEnd={(event, info) => {
+            if (info.offset.x > 100) changeProject(-1);
+            else if (info.offset.x < -100) changeProject(1);
+          }}
+        >
+          <AnimatePresence custom={direction}>
             <motion.img
-              key={projects[currentIndex].image}
-              src={projects[currentIndex].image}
-              alt={projects[currentIndex].title}
+              key={projects[index].image}
+              src={projects[index].image}
+              alt={projects[index].title}
               className="absolute w-full h-full object-cover"
-              initial={{ x: direction * 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -direction * 100, opacity: 0 }}
-              transition={{ duration: 0.8 }}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              variants={variants}
+              custom={direction}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
             />
           </AnimatePresence>
-        </div>
+        </motion.div>
 
-        {/* Navigation Buttons */}
-        <div className="flex mt-6 space-x-6">
-          <motion.button
-            className="px-6 py-2 border border-white rounded-full text-white hover:bg-white hover:text-black transition duration-300"
-            onClick={prevProject}
-            whileTap={{ scale: 0.9 }}
-          >
-            Prev
-          </motion.button>
-          <motion.button
-            className="px-6 py-2 border border-white rounded-full text-white hover:bg-white hover:text-black transition duration-300"
-            onClick={nextProject}
-            whileTap={{ scale: 0.9 }}
-          >
-            Next
-          </motion.button>
+        {/* Title with Sliding Effect */}
         </div>
+        <div className="absolute bottom-10 w-full  text-white text-center py-4">
+          <motion.h2
+            className="text-2xl sm:text-3xl md:text-4xl font-bold"
+            key={projects[index].title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          >
+            {projects[index].title}
+          </motion.h2>
+      </div>
 
-        {/* Pagination */}
-        <p className="mt-4 text-gray-300 text-sm">
-          {currentIndex + 1} / {projects.length}
-        </p>
+      {/* Indicator (Bottom Right) */}
+      <div className="absolute bottom-5 right-5 flex flex-col space-y-2 z-20">
+        {projects.map((_, i) => (
+          <motion.div
+            key={i}
+            className={`w-1 h-6 rounded-full transition-all ${
+              i === index ? "bg-white" : "bg-gray-500"
+            }`}
+            initial={{ opacity: 0, height: 4 }}
+            animate={{ opacity: 1, height: i === index ? 24 : 12 }}
+            transition={{ duration: 0.5 }}
+          />
+        ))}
       </div>
     </motion.div>
   );

@@ -1,5 +1,78 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+
+
+
+// Animation configurations
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.33, 1, 0.68, 1],
+    },
+  },
+};
+
+const borderVariants = {
+  hidden: { width: 0 },
+  visible: {
+    width: "100%",
+    transition: {
+      duration: 1.2,
+      ease: [0.785, 0.135, 0.15, 0.86],
+    },
+  },
+};
+
+const imageReveal = {
+  hidden: { scale: 1.1, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 1.2,
+      ease: [0.33, 1, 0.68, 1],
+    },
+  },
+};
+
+const curtainVariants = {
+  hidden: { x: "-100%" },
+  visible: {
+    x: "100%",
+    transition: {
+      duration: 1.4,
+      ease: [0.785, 0.135, 0.15, 0.86],
+    },
+  },
+};
+
+const DetailRow = ({ label, value }) => (
+  <motion.div
+    className="flex justify-between py-2 border-b border-gray-300"
+    variants={itemVariants}
+  >
+    <span className="text-gray-600">{label}</span>
+    <span className="text-gray-800 font-medium">{value}</span>
+  </motion.div>
+);
+
+
 
 const projects = {
   1: {
@@ -62,49 +135,116 @@ const ProjectDetails = () => {
 
   return (
     <>
-      <div className="lg:w-full lg:flex bg-[#F5EAD2] lg:pt-[100px]">
-        <div className="section-one lg:w-[100%]">
-          <div className="img-section lg:w-[70%] lg:p-5">
-            <img className="w-full bg-cover object-cover" src={project.images[0]} alt="" />
-          </div>
-        </div>
+      {/* First Section */}
+      <motion.div
+        className="lg:w-full lg:flex bg-[#D0EBE4] text-[#041C1D] lg:pt-[100px]"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={containerVariants}
+      >
+        {/* Left Image Section */}
+        <motion.div
+          className="section-one lg:w-[100%]"
+          variants={containerVariants}
+        >
+          <motion.div
+            className="img-section lg:w-[70%] lg:p-5 relative overflow-hidden"
+            variants={imageReveal}
+          >
+            <motion.img
+              className="w-full bg-cover object-cover"
+              src={project.images[0]}
+              alt=""
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.div
+              className="absolute top-0 left-0 w-full h-full bg-white z-20"
+              variants={curtainVariants}
+            />
+          </motion.div>
+        </motion.div>
 
-        <div className="section-two lg:mr-[100px] lg:flex lg:flex-col lg:gap-2">
-          <div className="part-one">
-            <p className="font-bold text-2xl">Info</p>
-            <p className="font-semibold lg:w-2xs text-xl">{project.description}</p>
-          </div>
+        {/* Right Content Section */}
+        <motion.div
+          className="section-two lg:mr-[100px] lg:flex lg:flex-col lg:gap-2"
+          variants={containerVariants}
+        >
+          {/* Info Section */}
+          <motion.div className="part-one" variants={itemVariants}>
+            <p className="font-bold text-2xl text-[#041C1D]">Info</p>
+            <motion.p
+              className="font-semibold lg:w-2xs text-xl text-[#041C1D]"
+              variants={itemVariants}
+            >
+              {project.description}
+            </motion.p>
+          </motion.div>
 
-          <div className="img-section2">
-            <img src={project.images[1]} alt="" />
-          </div>
+          {/* Second Image Section */}
+          <motion.div
+            className="img-section2 relative overflow-hidden"
+            variants={imageReveal}
+          >
+            <motion.img
+              src={project.images[1]}
+              alt=""
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.div
+              className="absolute top-0 left-0 w-full h-full bg-white z-20"
+              variants={curtainVariants}
+            />
+          </motion.div>
 
-          <div className="bg-[#F5EAD2] p-6 rounded-lg shadow-md w-full max-w-lg">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">DETAILS</h2>
-            <div className="border-t border-gray-500">
+          {/* Details Section */}
+          <motion.div
+            className="bg-[#D0EBE4] p-6 rounded-lg shadow-md w-full max-w-lg"
+            variants={containerVariants}
+          >
+            <motion.h2
+              className="text-lg font-semibold text-[#041C1D] mb-4"
+              variants={itemVariants}
+            >
+              DETAILS
+            </motion.h2>
+            <motion.div
+              className="border-t border-gray-500"
+              variants={borderVariants}
+            />
+            <motion.div variants={containerVariants}>
               <DetailRow label="LOCATION" value={project.location} />
               <DetailRow label="YEAR" value={project.year} />
               <DetailRow label="BATHROOM" value={project.bathrooms} />
               <DetailRow label="BEDROOM" value={project.bedrooms} />
               <DetailRow label="TOTAL LAND SIZE" value={project.size} />
               <DetailRow label="CATEGORY" value={project.category} />
-            </div>
-          </div>
-        </div>
-      </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
 
-      <div className="img-section3 bg-[#F5EAD2] lg:pt-10 lg:pb-10">
-        <img className="w-full h-full" src={project.images[2]} alt="" />
-      </div>
+      {/* Third Image Section */}
+      <motion.div
+        className="img-section3 bg-[#D0EBE4] lg:pt-10 lg:pb-0 relative overflow-hidden"
+        variants={imageReveal}
+      >
+        <motion.img
+          className="w-full h-full"
+          src={project.images[2]}
+         
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
+        />
+          {/* <motion.div
+            className="absolute top-0 left-0 w-full h-full bg-white z-20"
+            variants={curtainVariants}
+          /> */}
+      </motion.div>
     </>
   );
 };
-
-const DetailRow = ({ label, value }) => (
-  <div className="flex justify-between py-3 border-b border-gray-300">
-    <span className="font-semibold text-gray-700">{label}</span>
-    <span className="text-gray-700">{value}</span>
-  </div>
-);
 
 export default ProjectDetails;

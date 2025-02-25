@@ -103,11 +103,12 @@ const Herosection2 = () => {
   return (
     <>
    
-   <div ref={containerRef} className="relative  Lg:min-h-[200vh] bg-black flex items-center justify-center">
+   {/* <div ref={containerRef} className="relative  Lg:min-h-[200vh] bg-[#D0EBE4] flex items-center justify-center">
       {/* Canvas for Image Sequence */}
-      <canvas  ref={canvasRef} className="absolute w-full  top-0 left-0  h-full" />
+      {/* <canvas  ref={canvasRef} className="absolute w-full  top-0 left-0  h-full" />  */}
+      
 
-<div ref={containerRef} className="z-40 relative min-h-[100vh] flex flex-col md:flex-row items-center justify-center gap-8 px-6 md:px-16 py-20 overflow-hidden">
+<div ref={containerRef} className="z-40 bg-[#D0EBE4]  relative min-h-[100vh] flex flex-col md:flex-row items-center justify-center gap-8 px-6 md:px-16 py-20 overflow-hidden">
   {/* Left Image */}
   <motion.div
     className="w-[150px] h-[150px] mt-10 mr-42 md:w-[250px] md:h-[400px] overflow-hidden shadow-lg lg:mb-90 lg:mr-20
@@ -189,9 +190,13 @@ const Herosection2 = () => {
       className="object-cover w-full h-full"
     />
   </motion.div>
+  
+  <div className="lg:w-full absolute  text-center font-semibold   lg:text-[8rem] text-[3rem] z-50">
+        THE INNOVATION BEGINGS HERE
+      </div>
 </div>
 
-    </div>
+    {/* </div> */}
     </>
   );
 };
